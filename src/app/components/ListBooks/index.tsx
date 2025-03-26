@@ -33,6 +33,10 @@ const ListBooks = ({ name }: ListBooks) => {
     bookDetails: ResponseBooks['results'][0]['book_details']
   ) => bookDetails[0];
 
+  const handleClickBuy = (url: string) => {
+    window.open(url, '_blank');
+  };
+
   return (
     <Container>
       {books.map((book, i) => (
@@ -51,7 +55,7 @@ const ListBooks = ({ name }: ListBooks) => {
             </Description>
             <Publisher>{getBookDetails(book.book_details).publisher}</Publisher>
             <Rank>Rank {book.rank}</Rank>
-            <ButtonBuy>
+            <ButtonBuy onClick={() => handleClickBuy(book.amazon_product_url)}>
               Compre por R${getBookDetails(book.book_details).price}
             </ButtonBuy>
           </BookInfo>

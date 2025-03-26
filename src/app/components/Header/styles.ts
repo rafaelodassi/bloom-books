@@ -1,6 +1,6 @@
 'use client';
 
-import { Search, Star } from 'lucide-react';
+import { Search, Star, ArrowLeft } from 'lucide-react';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -85,4 +85,17 @@ export const TitleSubHeader = styled.h1`
   color: #010311;
   font-size: 24px;
   font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+`;
+
+export const BackIcon = styled(ArrowLeft)`
+  transition: opacity 0.3s linear;
+  flex-shrink: 0;
+
+  &:hover {
+    opacity: 0.7;
+    cursor: pointer;
+  }
 `;

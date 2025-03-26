@@ -11,7 +11,7 @@ export default async function Page({
 
   return (
     <>
-      <Header />
+      <Header contextType='book' />
       <ListBooks name={name} />
       <Pagination />
     </>

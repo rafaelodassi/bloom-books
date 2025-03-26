@@ -4,7 +4,7 @@ import { Pagination } from './components/Pagination';
 
 const Home = () => (
   <>
-    <Header />
+    <Header contextType='category' />
     <ListCategories />
     <Pagination />
   </>
