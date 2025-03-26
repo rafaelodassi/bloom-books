@@ -12,7 +12,7 @@ export const Container = styled.div`
   gap: 8px;
 `;
 
-export const PaginationItem = styled.button<{ isActive?: boolean }>`
+export const PaginationItem = styled.button<{ $isactive?: boolean }>`
   border: 1px solid #1f2445;
   background: #ffffff;
   border-radius: 12px;
@@ -33,7 +33,7 @@ export const PaginationItem = styled.button<{ isActive?: boolean }>`
   }
 
   ${(props) =>
-    props.isActive &&
+    props.$isactive &&
     css`
       background: #1f2445;
       color: #fff;
