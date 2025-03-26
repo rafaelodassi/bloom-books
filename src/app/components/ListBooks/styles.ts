@@ -21,6 +21,7 @@ export const BookImage = styled.div`
   width: 130px;
   height: 167px;
   background: #666;
+  flex-shrink: 0;
 `;
 
 export const Title = styled.h1`

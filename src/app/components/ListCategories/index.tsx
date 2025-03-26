@@ -1,3 +1,8 @@
+'use client';
+
+import { useFetchData } from '../../hooks/useFetchData';
+import { ResponseCategories } from '../../services/types';
+
 import {
   Container,
   LastPublished,
@@ -8,17 +13,31 @@ import {
   CategoryContainer,
 } from './styles';
 
-const ListCategories = () => (
-  <Container>
-    <CategoryContainer>
-      <TitleContainer>
-        <Title>Combined Print & E-Book Fiction</Title>
-        <Updated>Atualizada em 00/00/00</Updated>
-      </TitleContainer>
-      <LastPublished>Última publicação: 00/00/00</LastPublished>
-      <OlderPost>Publicação mais antiga: 00/00/00</OlderPost>
-    </CategoryContainer>
-  </Container>
-);
+const ListCategories = () => {
+  const { data } = useFetchData<ResponseCategories>({
+    url: 'lists/names.json',
+  });
+
+  const categories = data.results || [];
+
+  return (
+    <Container>
+      {categories.map((category, i) => (
+        <CategoryContainer key={`${category.list_name_encoded}_${i}`}>
+          <TitleContainer>
+            <Title>{category.display_name}</Title>
+            <Updated>Atualizada em {category.updated}</Updated>
+          </TitleContainer>
+          <LastPublished>
+            Última publicação: {category.newest_published_date}
+          </LastPublished>
+          <OlderPost>
+            Publicação mais antiga: {category.oldest_published_date}
+          </OlderPost>
+        </CategoryContainer>
+      ))}
+    </Container>
+  );
+};
 
 export { ListCategories };

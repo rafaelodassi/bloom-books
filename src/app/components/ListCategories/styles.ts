@@ -35,6 +35,7 @@ export const Title = styled.h1`
 export const TitleContainer = styled.div`
   display: flex;
   align-items: center;
+  flex-grow: 1;
   gap: 12px;
 `;
 
