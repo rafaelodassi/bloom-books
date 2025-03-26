@@ -20,7 +20,7 @@ const ViewMode = () => (
       <Text>por vez</Text>
     </PerPageContainer>
     <ViewerContainer>
-      <ListIcon size={24} color='#5062F0' />
+      <ListIcon size={24} color='#D0D3E2' isActive />
       <CardIcon size={24} color='#D0D3E2' />
     </ViewerContainer>
   </Container>

@@ -1,7 +1,7 @@
 'use client';
 
 import { Grid2X2, Rows3 } from 'lucide-react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -14,22 +14,34 @@ export const Text = styled.span`
   color: #000000;
 `;
 
-export const ListIcon = styled(Grid2X2)`
+export const ListIcon = styled(Grid2X2)<{ isActive?: boolean }>`
   transition: opacity 0.3s linear;
 
   &:hover {
     opacity: 0.7;
     cursor: pointer;
   }
+
+  ${(props) =>
+    props.isActive &&
+    css`
+      stroke: #5062f0;
+    `}
 `;
 
-export const CardIcon = styled(Rows3)`
+export const CardIcon = styled(Rows3)<{ isActive?: boolean }>`
   transition: opacity 0.3s linear;
 
   &:hover {
     opacity: 0.7;
     cursor: pointer;
   }
+
+  ${(props) =>
+    props.isActive &&
+    css`
+      stroke: #5062f0;
+    `}
 `;
 
 export const ViewerContainer = styled.div`

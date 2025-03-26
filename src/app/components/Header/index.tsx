@@ -1,3 +1,5 @@
+import { ListCategories } from '../ListCategories';
+import { Pagination } from '../Pagination';
 import { ViewMode } from '../ViewMode';
 
 import {
@@ -29,6 +31,8 @@ const Header = () => (
       <TitleSubHeader>Gêneros</TitleSubHeader>
       <ViewMode />
     </SubHeader>
+    <ListCategories />
+    <Pagination />
   </Container>
 );
 
