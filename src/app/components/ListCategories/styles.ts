@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -21,7 +22,7 @@ export const OlderPost = styled.span`
   font-size: 12px;
 `;
 
-export const Title = styled.h1`
+export const Title = styled(Link)`
   font-size: 20px;
   color: #5062f0;
   font-weight: 400;

@@ -25,7 +25,9 @@ const ListCategories = () => {
       {categories.map((category, i) => (
         <CategoryContainer key={`${category.list_name_encoded}_${i}`}>
           <TitleContainer>
-            <Title>{category.display_name}</Title>
+            <Title href={`/category/${category.list_name_encoded}`}>
+              {category.display_name}
+            </Title>
             <Updated>Atualizada em {category.updated}</Updated>
           </TitleContainer>
           <LastPublished>

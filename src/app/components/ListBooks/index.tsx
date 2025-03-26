@@ -18,9 +18,13 @@ import {
   FavoriteIcon,
 } from './styles';
 
-const ListBooks = () => {
+interface ListBooks {
+  name: string;
+}
+
+const ListBooks = ({ name }: ListBooks) => {
   const { data } = useFetchData<ResponseBooks>({
-    url: 'lists.json?list=hardcover-fiction',
+    url: `lists.json?list=${name}`,
   });
 
   const books = data.results || [];
