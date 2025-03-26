@@ -1,10 +1,88 @@
 'use client';
 
+import { Search, Star } from 'lucide-react';
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  display: flex;
-  height: 60px;
   width: 100%;
+`;
+
+export const MainHeader = styled.div`
+  width: 100%;
+  height: 60px;
   background: #5062f0;
+  display: flex;
+  align-items: center;
+  padding: 0px 120px;
+  gap: 20px;
+`;
+
+export const SubHeader = styled.div`
+  width: 100%;
+  height: 48px;
+  background: #f2f3f8;
+  padding: 0px 120px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+`;
+
+export const TitleMainHeader = styled.h1`
+  color: #fff;
+  font-size: 32px;
+  font-weight: 700;
+`;
+
+export const SearchContainer = styled.div`
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const SearchInput = styled.input`
+  border-radius: 16px;
+  border: none;
+  width: 100%;
+  height: 100%;
+  padding-left: 35px;
+  padding-right: 15px;
+  outline: none;
+  transition: box-shadow 0.3s linear;
+  font-size: 14px;
+  color: #0b1a8e;
+
+  &:hover,
+  &:focus,
+  &:active {
+    box-shadow: #0b1a8e 0px 0px 0px 3px;
+  }
+`;
+
+export const SearchInputContainer = styled.div`
+  width: 368px;
+  height: 32px;
+  position: relative;
+`;
+
+export const SearchIcon = styled(Search)`
+  position: absolute;
+  top: 4px;
+  left: 6px;
+`;
+
+export const FavoriteIcon = styled(Star)`
+  transition: opacity 0.3s linear;
+
+  &:hover {
+    opacity: 0.7;
+    cursor: pointer;
+  }
+`;
+
+export const TitleSubHeader = styled.h1`
+  color: #010311;
+  font-size: 24px;
+  font-weight: 700;
 `;

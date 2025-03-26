@@ -6,7 +6,7 @@ import StyledComponentsRegistry from './lib/registry';
 import './globals.css';
 
 const roboto = Roboto({
-  weight: '400',
+  weight: ['400', '700'],
   subsets: ['latin'],
 });
 
