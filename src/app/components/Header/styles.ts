@@ -1,5 +1,3 @@
-'use client';
-
 import { Search, Star, ArrowLeft } from 'lucide-react';
 import styled from 'styled-components';
 

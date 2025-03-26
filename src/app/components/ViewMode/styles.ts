@@ -1,5 +1,3 @@
-'use client';
-
 import { Grid2X2, Rows3 } from 'lucide-react';
 import styled, { css } from 'styled-components';
 

@@ -1,7 +1,4 @@
-'use client';
-
-import { useFetchData } from '../../hooks/useFetchData';
-import { ResponseBooks } from '../../services/types';
+import { Books, ResponseBooks } from '../../services/types';
 
 import {
   Container,
@@ -19,16 +16,10 @@ import {
 } from './styles';
 
 interface ListBooks {
-  name: string;
+  books: Books[];
 }
 
-const ListBooks = ({ name }: ListBooks) => {
-  const { data } = useFetchData<ResponseBooks>({
-    url: `lists.json?list=${name}`,
-  });
-
-  const books = data.results || [];
-
+const ListBooks = ({ books }: ListBooks) => {
   const getBookDetails = (
     bookDetails: ResponseBooks['results'][0]['book_details']
   ) => bookDetails[0];
