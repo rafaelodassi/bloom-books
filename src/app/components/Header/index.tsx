@@ -1,5 +1,6 @@
 import { useRouter } from 'next/navigation';
 
+import { useIsMobile } from '../../hooks/useMobile';
 import { ViewMode } from '../ViewMode';
 
 import {
@@ -14,6 +15,7 @@ import {
   FavoriteIcon,
   TitleSubHeader,
   BackIcon,
+  MainHeaderIsMobile,
 } from './styles';
 
 interface Header {
@@ -32,24 +34,55 @@ const Header = ({
   onChangeView,
 }: Header) => {
   const router = useRouter();
+  const isMobile = useIsMobile();
+
+  const renderSearchContainer = () => (
+    <SearchContainer>
+      <SearchInputContainer>
+        <SearchIcon color='#0B1A8E' size={24} />
+        <SearchInput
+          placeholder='Pesquise aqui...'
+          onChange={(e) => onSearch(e.target.value)}
+        />
+      </SearchInputContainer>
+    </SearchContainer>
+  );
+
+  const renderTitleMainHeader = () => (
+    <TitleMainHeader>Bloom Books</TitleMainHeader>
+  );
+
+  const renderFavoriteIcon = () => (
+    <FavoriteIcon color='#fff' size={24} fill='#fff' />
+  );
+
+  const renderMainHeaderContent = () => {
+    if (isMobile) {
+      return (
+        <>
+          <MainHeaderIsMobile>
+            {renderTitleMainHeader()}
+            {renderFavoriteIcon()}
+          </MainHeaderIsMobile>
+          {renderSearchContainer()}
+        </>
+      );
+    }
+
+    return (
+      <>
+        {renderTitleMainHeader()}
+        {renderSearchContainer()}
+        {renderFavoriteIcon()}
+      </>
+    );
+  };
 
   return (
     <Container>
-      <MainHeader>
-        <TitleMainHeader>Bloom Books</TitleMainHeader>
-        <SearchContainer>
-          <SearchInputContainer>
-            <SearchIcon color='#0B1A8E' size={24} />
-            <SearchInput
-              placeholder='Pesquise aqui...'
-              onChange={(e) => onSearch(e.target.value)}
-            />
-          </SearchInputContainer>
-        </SearchContainer>
-        <FavoriteIcon color='#fff' size={24} fill='#fff' />
-      </MainHeader>
+      <MainHeader>{renderMainHeaderContent()}</MainHeader>
       <SubHeader>
-        <TitleSubHeader>
+        <TitleSubHeader title={title}>
           {contextType === 'book' && (
             <BackIcon
               size={24}

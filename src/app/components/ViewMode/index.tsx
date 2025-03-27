@@ -26,13 +26,13 @@ const ViewMode = ({ onChangePerPage, onChangeView }: ViewMode) => {
   return (
     <Container>
       <PerPageContainer>
-        <Text>Exibir</Text>
+        <Text $hidemobile={false}>Exibir</Text>
         <Select onChange={(e) => onChangePerPage(Number(e.target.value))}>
           <option>5</option>
           <option>10</option>
           <option>15</option>
         </Select>
-        <Text>por vez</Text>
+        <Text $hidemobile={true}>por vez</Text>
       </PerPageContainer>
       <ViewerContainer>
         <ListIcon

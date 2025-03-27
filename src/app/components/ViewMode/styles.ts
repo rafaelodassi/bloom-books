@@ -7,9 +7,17 @@ export const Container = styled.div`
   align-items: center;
 `;
 
-export const Text = styled.span`
+export const Text = styled.span<{ $hidemobile: boolean }>`
   font-size: 12px;
   color: #000000;
+
+  @media (max-width: 768px) {
+    ${(props) =>
+      props.$hidemobile &&
+      css`
+        display: none;
+      `}
+  }
 `;
 
 export const ListIcon = styled(Rows3)<{ $isactive?: boolean }>`

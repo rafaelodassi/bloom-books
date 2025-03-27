@@ -1,4 +1,4 @@
-import { Star } from 'lucide-react';
+import { Star, BookText } from 'lucide-react';
 import styled, { css } from 'styled-components';
 
 export const Container = styled.div<{ $viewmode: string }>`
@@ -18,6 +18,15 @@ export const Container = styled.div<{ $viewmode: string }>`
       flex-wrap: wrap;
       justify-content: center;
     `}
+
+  @media (max-width: 768px) {
+    padding: 10px;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 `;
 
 export const BookContainer = styled.div<{ $viewmode: string }>`
@@ -40,8 +49,11 @@ export const BookContainer = styled.div<{ $viewmode: string }>`
 export const BookImage = styled.div`
   width: 130px;
   height: 167px;
-  background: #666;
+  background: #f2f3f8;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Title = styled.h1`
@@ -110,6 +122,11 @@ export const TitleContainer = styled.div<{ $viewmode: string }>`
       flex-direction: column;
       align-items: flex-start;
     `}
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 export const FavoriteIcon = styled(Star)`
@@ -119,4 +136,8 @@ export const FavoriteIcon = styled(Star)`
     cursor: pointer;
     fill: #5062f0;
   }
+`;
+
+export const BookIcon = styled(BookText)`
+  opacity: 0.5;
 `;

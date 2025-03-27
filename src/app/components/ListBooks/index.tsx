@@ -13,6 +13,7 @@ import {
   Author,
   TitleContainer,
   FavoriteIcon,
+  BookIcon,
 } from './styles';
 
 interface ListBooks {
@@ -36,7 +37,9 @@ const ListBooks = ({ books, viewMode }: ListBooks) => {
           key={`${getBookDetails(book.book_details).title}_${i}`}
           $viewmode={viewMode}
         >
-          <BookImage />
+          <BookImage>
+            <BookIcon size={48} color='#5062F0' />
+          </BookImage>
           <BookInfo>
             <TitleContainer $viewmode={viewMode}>
               <Title>{getBookDetails(book.book_details).title}</Title>

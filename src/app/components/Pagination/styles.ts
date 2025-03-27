@@ -7,6 +7,11 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   gap: 8px;
+  flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 `;
 
 export const PaginationItem = styled.button<{ $isactive?: boolean }>`
@@ -22,6 +27,7 @@ export const PaginationItem = styled.button<{ $isactive?: boolean }>`
   font-size: 12px;
   font-weight: 700;
   transition: all 0.3s linear;
+  flex-shrink: 0;
 
   &:hover {
     cursor: pointer;

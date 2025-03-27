@@ -18,6 +18,11 @@ export const Container = styled.div<{ $viewmode: string }>`
       flex-wrap: wrap;
       justify-content: center;
     `}
+
+  @media (max-width: 768px) {
+    padding: 10px;
+    gap: 26px;
+  }
 `;
 
 export const LastPublished = styled.span`
@@ -54,6 +59,12 @@ export const TitleContainer = styled.div<{ $viewmode: string }>`
       align-items: flex-start;
       gap: 4px;
     `}
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
 `;
 
 export const Updated = styled.div`
@@ -79,4 +90,12 @@ export const CategoryContainer = styled.div<{ $viewmode: string }>`
       width: 186px;
       max-width: 186px;
     `}
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    flex-grow: 1;
+    gap: 12px;
+  }
 `;
