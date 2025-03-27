@@ -33,7 +33,9 @@ const Pagination = ({
 
   return (
     <Container>
-      <PaginationItem onClick={handleClickPrev}>&lt;</PaginationItem>
+      {numberOfPages > 0 && (
+        <PaginationItem onClick={handleClickPrev}>&lt;</PaginationItem>
+      )}
       {arrayPages.map((page) => (
         <PaginationItem
           $isactive={currentPage === page}
@@ -43,7 +45,9 @@ const Pagination = ({
           {page}
         </PaginationItem>
       ))}
-      <PaginationItem onClick={handleClickNext}>&gt;</PaginationItem>
+      {numberOfPages > 0 && (
+        <PaginationItem onClick={handleClickNext}>&gt;</PaginationItem>
+      )}
     </Container>
   );
 };
