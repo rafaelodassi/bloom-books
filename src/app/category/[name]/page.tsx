@@ -19,6 +19,7 @@ const Page = () => {
   const [booksFound, setBooksFound] = useState<Books>([]);
   const [perPage, setPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
+  const [viewMode, setViewMode] = useState('list');
 
   const { data } = useFetchData<ResponseBooks>({
     url: `lists.json?list=${name}`,
@@ -64,8 +65,9 @@ const Page = () => {
         title={title}
         onSearch={handleSearch}
         onChangePerPage={handleChangePerPage}
+        onChangeView={setViewMode}
       />
-      <ListBooks books={paginatedItems} />
+      <ListBooks books={paginatedItems} viewMode={viewMode} />
       <Pagination
         totalItems={booksFound.length}
         perPage={perPage}

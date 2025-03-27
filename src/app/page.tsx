@@ -15,6 +15,7 @@ const Home = () => {
   const [categoriesFound, setCategoriesFound] = useState<Categories>([]);
   const [perPage, setPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
+  const [viewMode, setViewMode] = useState('list');
 
   const { data } = useFetchData<ResponseCategories>({
     url: 'lists/names.json',
@@ -58,8 +59,9 @@ const Home = () => {
         title='Gêneros'
         onSearch={handleSearch}
         onChangePerPage={handleChangePerPage}
+        onChangeView={setViewMode}
       />
-      <ListCategories categories={paginatedItems} />
+      <ListCategories categories={paginatedItems} viewMode={viewMode} />
       <Pagination
         totalItems={categoriesFound.length}
         perPage={perPage}

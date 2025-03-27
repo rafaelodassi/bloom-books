@@ -21,9 +21,16 @@ interface Header {
   contextType: string;
   onSearch: (value: string) => void;
   onChangePerPage: (value: number) => void;
+  onChangeView: (viewMode: string) => void;
 }
 
-const Header = ({ title, contextType, onSearch, onChangePerPage }: Header) => {
+const Header = ({
+  title,
+  contextType,
+  onSearch,
+  onChangePerPage,
+  onChangeView,
+}: Header) => {
   const router = useRouter();
 
   return (
@@ -52,7 +59,10 @@ const Header = ({ title, contextType, onSearch, onChangePerPage }: Header) => {
           )}
           {title}
         </TitleSubHeader>
-        <ViewMode onChangePerPage={onChangePerPage} />
+        <ViewMode
+          onChangePerPage={onChangePerPage}
+          onChangeView={onChangeView}
+        />
       </SubHeader>
     </Container>
   );

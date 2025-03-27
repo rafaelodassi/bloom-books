@@ -1,18 +1,40 @@
 import { Star } from 'lucide-react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled.div<{ $viewmode: string }>`
   width: 100%;
   padding: 0px 120px;
   padding-top: 24px;
   display: flex;
   flex-direction: column;
   gap: 28px;
+
+  ${(props) =>
+    props.$viewmode === 'card' &&
+    css`
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    `}
 `;
 
-export const BookContainer = styled.div`
+export const BookContainer = styled.div<{ $viewmode: string }>`
   display: flex;
   gap: 30px;
+
+  ${(props) =>
+    props.$viewmode === 'card' &&
+    css`
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      flex-grow: 1;
+      gap: 12px;
+      width: 186px;
+      max-width: 186px;
+    `}
 `;
 
 export const BookImage = styled.div`
@@ -76,14 +98,23 @@ export const Author = styled.span`
   gap: 4px;
 `;
 
-export const TitleContainer = styled.div`
+export const TitleContainer = styled.div<{ $viewmode: string }>`
   display: flex;
   align-items: center;
   gap: 4px;
   margin-bottom: 6px;
+
+  ${(props) =>
+    props.$viewmode === 'card' &&
+    css`
+      flex-direction: column;
+      align-items: flex-start;
+    `}
 `;
 
 export const FavoriteIcon = styled(Star)`
+  flex-shrink: 0;
+
   &:hover {
     cursor: pointer;
     fill: #5062f0;

@@ -1,13 +1,23 @@
 import Link from 'next/link';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled.div<{ $viewmode: string }>`
   width: 100%;
   padding: 0px 120px;
   padding-top: 24px;
   display: flex;
   flex-direction: column;
   gap: 50px;
+
+  ${(props) =>
+    props.$viewmode === 'card' &&
+    css`
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    `}
 `;
 
 export const LastPublished = styled.span`
@@ -31,11 +41,19 @@ export const Title = styled(Link)`
   }
 `;
 
-export const TitleContainer = styled.div`
+export const TitleContainer = styled.div<{ $viewmode: string }>`
   display: flex;
   align-items: center;
   flex-grow: 1;
   gap: 12px;
+
+  ${(props) =>
+    props.$viewmode === 'card' &&
+    css`
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    `}
 `;
 
 export const Updated = styled.div`
@@ -44,9 +62,21 @@ export const Updated = styled.div`
   font-style: italic;
 `;
 
-export const CategoryContainer = styled.div`
+export const CategoryContainer = styled.div<{ $viewmode: string }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
+
+  ${(props) =>
+    props.$viewmode === 'card' &&
+    css`
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      flex-grow: 1;
+      gap: 12px;
+      width: 186px;
+      max-width: 186px;
+    `}
 `;

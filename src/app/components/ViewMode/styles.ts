@@ -12,7 +12,7 @@ export const Text = styled.span`
   color: #000000;
 `;
 
-export const ListIcon = styled(Grid2X2)<{ $isactive?: boolean }>`
+export const ListIcon = styled(Rows3)<{ $isactive?: boolean }>`
   transition: opacity 0.3s linear;
 
   &:hover {
@@ -27,7 +27,7 @@ export const ListIcon = styled(Grid2X2)<{ $isactive?: boolean }>`
     `}
 `;
 
-export const CardIcon = styled(Rows3)<{ $isactive?: boolean }>`
+export const CardIcon = styled(Grid2X2)<{ $isactive?: boolean }>`
   transition: opacity 0.3s linear;
 
   &:hover {

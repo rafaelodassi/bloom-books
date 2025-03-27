@@ -17,9 +17,10 @@ import {
 
 interface ListBooks {
   books: Books[];
+  viewMode: string;
 }
 
-const ListBooks = ({ books }: ListBooks) => {
+const ListBooks = ({ books, viewMode }: ListBooks) => {
   const getBookDetails = (
     bookDetails: ResponseBooks['results'][0]['book_details']
   ) => bookDetails[0];
@@ -29,12 +30,15 @@ const ListBooks = ({ books }: ListBooks) => {
   };
 
   return (
-    <Container>
+    <Container $viewmode={viewMode}>
       {books.map((book, i) => (
-        <BookContainer key={`${getBookDetails(book.book_details).title}_${i}`}>
+        <BookContainer
+          key={`${getBookDetails(book.book_details).title}_${i}`}
+          $viewmode={viewMode}
+        >
           <BookImage />
           <BookInfo>
-            <TitleContainer>
+            <TitleContainer $viewmode={viewMode}>
               <Title>{getBookDetails(book.book_details).title}</Title>
               <Author>
                 {getBookDetails(book.book_details).contributor}
