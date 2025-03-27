@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
 
+import { Header } from './components/Header';
+import { LayoutProvider } from './context/LayoutContext';
 import StyledComponentsRegistry from './lib/registry';
 
 import './globals.css';
@@ -23,7 +25,12 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={roboto.className}>
-        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        <StyledComponentsRegistry>
+          <LayoutProvider>
+            <Header />
+            {children}
+          </LayoutProvider>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );

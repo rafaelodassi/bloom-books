@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 
 import { useParams } from 'next/navigation';
 
-import { Header } from '../../components/Header';
 import { ListBooks } from '../../components/ListBooks';
 import { Pagination } from '../../components/Pagination';
+import { useLayout } from '../../context/LayoutContext';
 import { useFetchData } from '../../hooks/useFetchData';
 import { usePagination } from '../../hooks/usePagination';
 import { ResponseBooks } from '../../services/types';
@@ -15,64 +15,51 @@ type Books = ResponseBooks['results'];
 
 const Page = () => {
   const { name } = useParams<{ name: string }>();
-
-  const [booksFound, setBooksFound] = useState<Books>([]);
-  const [perPage, setPerPage] = useState(5);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [viewMode, setViewMode] = useState('list');
+  const [dataBySearch, setDataBySearch] = useState<Books>([]);
+  const { perPage, currentPage, setCurrentPage, searchValue } = useLayout();
 
   const { data } = useFetchData<ResponseBooks>({
     url: `lists.json?list=${name}`,
   });
 
-  const { paginatedItems } = usePagination<Books>({
-    perPage,
-    currentPage,
-    items: booksFound,
-  });
-
+  const results = data.results || [];
   const title = data.results?.[0].display_name ?? '';
 
   useEffect(() => {
-    setBooksFound(data.results || []);
+    setDataBySearch(results);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
-  const handleSearch = (value: string) => {
-    let results = data.results || [];
+  useEffect(() => {
+    let filteredData = results;
 
-    if (value) {
-      results = results.filter(
+    if (searchValue) {
+      filteredData = filteredData.filter(
         (bookFound) =>
           bookFound.book_details[0].title
             .toLowerCase()
-            .search(value.toLowerCase()) !== -1
+            .search(searchValue.toLowerCase()) !== -1
       );
     }
 
     setCurrentPage(1);
-    setBooksFound(results);
-  };
+    setDataBySearch(filteredData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchValue]);
 
-  const handleChangePerPage = (value: number) => {
-    setCurrentPage(1);
-    setPerPage(value);
-  };
+  const { paginatedItems } = usePagination<Books>({
+    perPage,
+    currentPage,
+    items: dataBySearch,
+  });
 
   return (
     <>
-      <Header
-        contextType='book'
-        title={title}
-        onSearch={handleSearch}
-        onChangePerPage={handleChangePerPage}
-        onChangeView={setViewMode}
-      />
-      <ListBooks books={paginatedItems} viewMode={viewMode} />
+      <ListBooks data={paginatedItems} />
       <Pagination
-        totalItems={booksFound.length}
+        totalItems={dataBySearch.length}
         perPage={perPage}
         currentPage={currentPage}
-        onChangePage={setCurrentPage}
       />
     </>
   );

@@ -1,3 +1,4 @@
+import { useLayout } from '../../context/LayoutContext';
 import { Books, ResponseBooks } from '../../services/types';
 
 import {
@@ -17,11 +18,12 @@ import {
 } from './styles';
 
 interface ListBooks {
-  books: Books[];
-  viewMode: string;
+  data: Books[];
 }
 
-const ListBooks = ({ books, viewMode }: ListBooks) => {
+const ListBooks = ({ data }: ListBooks) => {
+  const { viewMode } = useLayout();
+
   const getBookDetails = (
     bookDetails: ResponseBooks['results'][0]['book_details']
   ) => bookDetails[0];
@@ -32,7 +34,7 @@ const ListBooks = ({ books, viewMode }: ListBooks) => {
 
   return (
     <Container $viewmode={viewMode}>
-      {books.map((book, i) => (
+      {data.map((book, i) => (
         <BookContainer
           key={`${getBookDetails(book.book_details).title}_${i}`}
           $viewmode={viewMode}

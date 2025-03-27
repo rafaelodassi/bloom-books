@@ -1,18 +1,15 @@
-import { Container, PaginationItem } from './styles';
+import { useLayout } from '../../context/LayoutContext';
 
+import { Container, PaginationItem } from './styles';
 interface Pagination {
   totalItems: number;
   perPage: number;
   currentPage: number;
-  onChangePage: (page: number) => void;
 }
 
-const Pagination = ({
-  totalItems,
-  perPage,
-  currentPage,
-  onChangePage,
-}: Pagination) => {
+const Pagination = ({ totalItems, perPage, currentPage }: Pagination) => {
+  const { setCurrentPage } = useLayout();
+
   const numberOfPages = Math.ceil(totalItems / perPage);
   const arrayPages = Array.from(
     { length: numberOfPages },
@@ -21,13 +18,13 @@ const Pagination = ({
 
   const handleClickPrev = () => {
     if (currentPage > 1) {
-      onChangePage(currentPage - 1);
+      setCurrentPage(currentPage - 1);
     }
   };
 
   const handleClickNext = () => {
     if (currentPage < numberOfPages) {
-      onChangePage(currentPage + 1);
+      setCurrentPage(currentPage + 1);
     }
   };
 
@@ -40,7 +37,7 @@ const Pagination = ({
         <PaginationItem
           $isactive={currentPage === page}
           key={page}
-          onClick={() => onChangePage(page)}
+          onClick={() => setCurrentPage(page)}
         >
           {page}
         </PaginationItem>

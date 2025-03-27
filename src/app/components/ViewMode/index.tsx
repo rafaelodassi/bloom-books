@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useLayout } from '../../context/LayoutContext';
 
 import {
   Container,
@@ -10,24 +10,14 @@ import {
   Select,
 } from './styles';
 
-interface ViewMode {
-  onChangePerPage: (value: number) => void;
-  onChangeView: (viewMode: string) => void;
-}
-
-const ViewMode = ({ onChangePerPage, onChangeView }: ViewMode) => {
-  const [viewMode, setViewMode] = useState('list');
-
-  const handleChangeViewMode = (viewMode: string) => {
-    setViewMode(viewMode);
-    onChangeView(viewMode);
-  };
+const ViewMode = () => {
+  const { viewMode, setViewMode, changePerPage } = useLayout();
 
   return (
     <Container>
       <PerPageContainer>
         <Text $hidemobile={false}>Exibir</Text>
-        <Select onChange={(e) => onChangePerPage(Number(e.target.value))}>
+        <Select onChange={(e) => changePerPage(Number(e.target.value))}>
           <option>5</option>
           <option>10</option>
           <option>15</option>
@@ -39,13 +29,13 @@ const ViewMode = ({ onChangePerPage, onChangeView }: ViewMode) => {
           size={24}
           color='#D0D3E2'
           $isactive={viewMode === 'list'}
-          onClick={() => handleChangeViewMode('list')}
+          onClick={() => setViewMode('list')}
         />
         <CardIcon
           size={24}
           color='#D0D3E2'
           $isactive={viewMode === 'card'}
-          onClick={() => handleChangeViewMode('card')}
+          onClick={() => setViewMode('card')}
         />
       </ViewerContainer>
     </Container>

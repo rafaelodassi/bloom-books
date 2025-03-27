@@ -1,5 +1,8 @@
+'use client';
+
 import { useRouter } from 'next/navigation';
 
+import { useLayout } from '../../context/LayoutContext';
 import { useIsMobile } from '../../hooks/useMobile';
 import { ViewMode } from '../ViewMode';
 
@@ -19,22 +22,14 @@ import {
 } from './styles';
 
 interface Header {
-  title: string;
-  contextType: string;
-  onSearch: (value: string) => void;
-  onChangePerPage: (value: number) => void;
-  onChangeView: (viewMode: string) => void;
+  title?: string;
+  contextType?: string;
 }
 
-const Header = ({
-  title,
-  contextType,
-  onSearch,
-  onChangePerPage,
-  onChangeView,
-}: Header) => {
+const Header = ({ title, contextType }: Header) => {
   const router = useRouter();
   const isMobile = useIsMobile();
+  const { setSearchValue } = useLayout();
 
   const renderSearchContainer = () => (
     <SearchContainer>
@@ -42,7 +37,7 @@ const Header = ({
         <SearchIcon color='#0B1A8E' size={24} />
         <SearchInput
           placeholder='Pesquise aqui...'
-          onChange={(e) => onSearch(e.target.value)}
+          onChange={(e) => setSearchValue(e.target.value)}
         />
       </SearchInputContainer>
     </SearchContainer>
@@ -92,10 +87,7 @@ const Header = ({
           )}
           {title}
         </TitleSubHeader>
-        <ViewMode
-          onChangePerPage={onChangePerPage}
-          onChangeView={onChangeView}
-        />
+        <ViewMode />
       </SubHeader>
     </Container>
   );
