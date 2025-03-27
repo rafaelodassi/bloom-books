@@ -13,7 +13,14 @@ type Categories = ResponseCategories['results'];
 
 const Home = () => {
   const [dataBySearch, setDataBySearch] = useState<Categories>([]);
-  const { perPage, currentPage, setCurrentPage, searchValue } = useLayout();
+  const {
+    perPage,
+    currentPage,
+    setCurrentPage,
+    searchValue,
+    setTitle,
+    setContextType,
+  } = useLayout();
 
   const { data } = useFetchData<ResponseCategories>({
     url: 'lists/names.json',
@@ -22,6 +29,8 @@ const Home = () => {
   const results = data.results || [];
 
   useEffect(() => {
+    setContextType('category');
+    setTitle('Gêneros');
     setDataBySearch(results);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);

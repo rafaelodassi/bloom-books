@@ -21,15 +21,10 @@ import {
   MainHeaderIsMobile,
 } from './styles';
 
-interface Header {
-  title?: string;
-  contextType?: string;
-}
-
-const Header = ({ title, contextType }: Header) => {
+const Header = () => {
   const router = useRouter();
   const isMobile = useIsMobile();
-  const { setSearchValue } = useLayout();
+  const { setSearchValue, title, contextType } = useLayout();
 
   const renderSearchContainer = () => (
     <SearchContainer>

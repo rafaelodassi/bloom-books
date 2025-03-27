@@ -11,6 +11,10 @@ interface LayoutContext {
   setCurrentPage: (currentPage: number) => void;
   searchValue: string;
   setSearchValue: (value: string) => void;
+  title: string;
+  setTitle: (title: string) => void;
+  contextType: string;
+  setContextType: (contextType: string) => void;
 }
 
 interface LayoutProvider {
@@ -24,6 +28,8 @@ export const LayoutProvider = ({ children }: LayoutProvider) => {
   const [perPage, setPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState('');
+  const [title, setTitle] = useState('');
+  const [contextType, setContextType] = useState('');
 
   const changePerPage = (perPage: number) => {
     setCurrentPage(1);
@@ -41,6 +47,10 @@ export const LayoutProvider = ({ children }: LayoutProvider) => {
         setCurrentPage,
         searchValue,
         setSearchValue,
+        title,
+        setTitle,
+        contextType,
+        setContextType,
       }}
     >
       {children}

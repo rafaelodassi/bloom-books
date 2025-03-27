@@ -16,16 +16,24 @@ type Books = ResponseBooks['results'];
 const Page = () => {
   const { name } = useParams<{ name: string }>();
   const [dataBySearch, setDataBySearch] = useState<Books>([]);
-  const { perPage, currentPage, setCurrentPage, searchValue } = useLayout();
+  const {
+    perPage,
+    currentPage,
+    setCurrentPage,
+    searchValue,
+    setTitle,
+    setContextType,
+  } = useLayout();
 
   const { data } = useFetchData<ResponseBooks>({
     url: `lists.json?list=${name}`,
   });
 
   const results = data.results || [];
-  const title = data.results?.[0].display_name ?? '';
 
   useEffect(() => {
+    setContextType('book');
+    setTitle(results[0]?.display_name ?? '');
     setDataBySearch(results);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
