@@ -17,10 +17,13 @@ import {
 } from './styles';
 
 interface Header {
+  title: string;
   contextType: string;
+  onSearch: (value: string) => void;
+  onChangePerPage: (value: number) => void;
 }
 
-const Header = ({ contextType }: Header) => {
+const Header = ({ title, contextType, onSearch, onChangePerPage }: Header) => {
   const router = useRouter();
 
   return (
@@ -30,7 +33,10 @@ const Header = ({ contextType }: Header) => {
         <SearchContainer>
           <SearchInputContainer>
             <SearchIcon color='#0B1A8E' size={24} />
-            <SearchInput placeholder='Pesquise aqui...' />
+            <SearchInput
+              placeholder='Pesquise aqui...'
+              onChange={(e) => onSearch(e.target.value)}
+            />
           </SearchInputContainer>
         </SearchContainer>
         <FavoriteIcon color='#fff' size={24} fill='#fff' />
@@ -44,9 +50,9 @@ const Header = ({ contextType }: Header) => {
               onClick={() => router.push('/')}
             />
           )}
-          Gêneros
+          {title}
         </TitleSubHeader>
-        <ViewMode />
+        <ViewMode onChangePerPage={onChangePerPage} />
       </SubHeader>
     </Container>
   );

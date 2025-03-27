@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 import { useParams } from 'next/navigation';
 
 import { Header } from '../../components/Header';
@@ -10,17 +12,39 @@ import { ResponseBooks } from '../../services/types';
 
 const Page = () => {
   const { name } = useParams<{ name: string }>();
+  const [books, setBooks] = useState<ResponseBooks['results']>([]);
   const { data } = useFetchData<ResponseBooks>({
     url: `lists.json?list=${name}`,
   });
 
-  const books = data.results || [];
+  useEffect(() => {
+    setBooks(data.results || []);
+  }, [data]);
+
+  const handleSearch = (value: string) => {
+    let results = data.results || [];
+
+    if (value) {
+      results = books.filter(
+        (book) =>
+          book.book_details[0].title
+            .toLowerCase()
+            .search(value.toLowerCase()) !== -1
+      );
+    }
+
+    setBooks(results);
+  };
 
   return (
     <>
-      <Header contextType='book' />
+      <Header
+        contextType='book'
+        title={books[0]?.list_name}
+        onSearch={handleSearch}
+      />
       <ListBooks books={books} />
-      <Pagination />
+      <Pagination numberOfItems={50} numberPerPage={5} currentPage={1} />
     </>
   );
 };

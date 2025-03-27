@@ -8,11 +8,19 @@ import {
   Select,
 } from './styles';
 
-const ViewMode = () => (
+interface ViewMode {
+  onChangePerPage: (value: number) => void;
+}
+
+const ViewMode = ({ onChangePerPage }: ViewMode) => (
   <Container>
     <PerPageContainer>
       <Text>Exibir</Text>
-      <Select>
+      <Select
+        onChange={(e) => {
+          onChangePerPage(Number(e.target.value));
+        }}
+      >
         <option>5</option>
         <option>10</option>
         <option>15</option>
