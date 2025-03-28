@@ -1,5 +1,5 @@
 import { useLayout } from '../../context/LayoutContext';
-import { Books, ResponseBooks } from '../../services/types';
+import { Book, ResponseBooks } from '../../services/types';
 
 import {
   Container,
@@ -18,11 +18,11 @@ import {
 } from './styles';
 
 interface ListBooks {
-  data: Books[];
+  data: Book[];
 }
 
 const ListBooks = ({ data }: ListBooks) => {
-  const { viewMode } = useLayout();
+  const { viewMode, addFavorite, favorites } = useLayout();
 
   const getBookDetails = (
     bookDetails: ResponseBooks['results'][0]['book_details']
@@ -32,13 +32,17 @@ const ListBooks = ({ data }: ListBooks) => {
     window.open(url, '_blank');
   };
 
+  const handleClickFavorite = (book: Book) => {
+    addFavorite(book);
+  };
+
+  const isFavorite = (uuid: string) =>
+    !!favorites.find((favorite) => favorite.uuid === uuid);
+
   return (
     <Container $viewmode={viewMode}>
-      {data.map((book, i) => (
-        <BookContainer
-          key={`${getBookDetails(book.book_details).title}_${i}`}
-          $viewmode={viewMode}
-        >
+      {data.map((book) => (
+        <BookContainer key={book.uuid} $viewmode={viewMode}>
           <BookImage>
             <BookIcon size={48} color='#5062F0' />
           </BookImage>
@@ -47,7 +51,12 @@ const ListBooks = ({ data }: ListBooks) => {
               <Title>{getBookDetails(book.book_details).title}</Title>
               <Author>
                 {getBookDetails(book.book_details).contributor}
-                <FavoriteIcon size={16} color='#5062F0' />
+                <FavoriteIcon
+                  size={16}
+                  color='#5062F0'
+                  onClick={() => handleClickFavorite(book)}
+                  $isfavorite={isFavorite(book.uuid)}
+                />
               </Author>
             </TitleContainer>
             <Description>

@@ -1,4 +1,5 @@
 interface Category {
+  uuid: string;
   display_name: string;
   list_name: string;
   list_name_encoded: string;
@@ -14,7 +15,8 @@ interface ResponseCategories {
   results: Category[];
 }
 
-interface Books {
+interface Book {
+  uuid: string;
   amazon_product_url: string;
   asterisk: number;
   bestsellers_date: string;
@@ -54,7 +56,7 @@ interface ResponseBooks {
   last_modified: string;
   num_results: number;
   status: string;
-  results: Books[];
+  results: Book[];
 }
 
-export type { Category, ResponseCategories, Books, ResponseBooks };
+export type { Category, ResponseCategories, Book, ResponseBooks };

@@ -131,8 +131,14 @@ export const TitleContainer = styled.div<{ $viewmode: string }>`
   }
 `;
 
-export const FavoriteIcon = styled(Star)`
+export const FavoriteIcon = styled(Star)<{ $isfavorite: boolean }>`
   flex-shrink: 0;
+
+  ${(props) =>
+    props.$isfavorite &&
+    css`
+      fill: #5062f0;
+    `}
 
   &:hover {
     cursor: pointer;

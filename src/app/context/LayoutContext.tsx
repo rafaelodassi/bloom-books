@@ -2,6 +2,8 @@
 
 import { createContext, useContext, useState, ReactNode } from 'react';
 
+import { Book } from '../services/types';
+
 interface LayoutContext {
   viewMode: string;
   setViewMode: (viewMode: string) => void;
@@ -17,6 +19,9 @@ interface LayoutContext {
   setContextType: (contextType: string) => void;
   openFavorites: boolean;
   setOpenFavorites: (openFavorites: boolean) => void;
+  favorites: Book[];
+  setFavorites: (favorites: Book[]) => void;
+  addFavorite: (favorite: Book) => void;
 }
 
 interface LayoutProvider {
@@ -33,10 +38,25 @@ export const LayoutProvider = ({ children }: LayoutProvider) => {
   const [title, setTitle] = useState('');
   const [contextType, setContextType] = useState('');
   const [openFavorites, setOpenFavorites] = useState(false);
+  const [favorites, setFavorites] = useState<Book[]>([] as Book[]);
 
   const changePerPage = (perPage: number) => {
     setCurrentPage(1);
     setPerPage(perPage);
+  };
+
+  const addFavorite = (favorite: Book) => {
+    const hasFavorite = favorites.find((f) => f.uuid === favorite.uuid);
+
+    if (!hasFavorite) {
+      setFavorites([...favorites, favorite]);
+    } else {
+      const filteredFavorite = favorites.filter(
+        (f) => f.uuid !== favorite.uuid
+      );
+
+      setFavorites(filteredFavorite);
+    }
   };
 
   return (
@@ -56,6 +76,9 @@ export const LayoutProvider = ({ children }: LayoutProvider) => {
         setContextType,
         openFavorites,
         setOpenFavorites,
+        favorites,
+        setFavorites,
+        addFavorite,
       }}
     >
       {children}

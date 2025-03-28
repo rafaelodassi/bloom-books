@@ -20,11 +20,8 @@ const ListCategories = ({ data }: ListCategories) => {
 
   return (
     <Container $viewmode={viewMode}>
-      {data.map((category, i) => (
-        <CategoryContainer
-          key={`${category.list_name_encoded}_${i}`}
-          $viewmode={viewMode}
-        >
+      {data.map((category) => (
+        <CategoryContainer key={category.uuid} $viewmode={viewMode}>
           <TitleContainer $viewmode={viewMode}>
             <Title href={`/category/${category.list_name_encoded}`}>
               {category.display_name}

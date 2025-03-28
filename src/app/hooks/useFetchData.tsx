@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import { v4 as uuidv4 } from 'uuid';
+
 import { api } from '../services/config';
 
 interface UseFetchData {
@@ -15,7 +17,13 @@ function useFetchData<T>({ url }: UseFetchData) {
     const fetchData = async () => {
       try {
         const { data: response } = await api.get<T>(url);
-        setData(response);
+        const responseData = response as T & { results: T[] };
+        const results = responseData.results;
+
+        setData({
+          ...responseData,
+          results: results.map((result) => ({ ...result, uuid: uuidv4() })),
+        });
       } catch (error) {
         setError(!!error);
       }
