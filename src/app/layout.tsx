@@ -29,8 +29,10 @@ export default function RootLayout({
       <body className={roboto.className}>
         <StyledComponentsRegistry>
           <LayoutProvider>
-            <Header />
-            {children}
+            <main>
+              <Header />
+              {children}
+            </main>
             <div id='drawer-root' />
           </LayoutProvider>
         </StyledComponentsRegistry>

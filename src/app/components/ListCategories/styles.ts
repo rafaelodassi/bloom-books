@@ -8,6 +8,8 @@ export const Container = styled.div<{ $viewmode: string }>`
   display: flex;
   flex-direction: column;
   gap: 50px;
+  flex-grow: 1;
+  overflow-y: auto;
 
   ${(props) =>
     props.$viewmode === 'card' &&
