@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 
 import { useLayout } from '../../context/LayoutContext';
 import { useIsMobile } from '../../hooks/useMobile';
+import { Drawer } from '../Drawer';
 import { ViewMode } from '../ViewMode';
 
 import {
@@ -19,12 +20,20 @@ import {
   TitleSubHeader,
   BackIcon,
   MainHeaderIsMobile,
+  FavoriteIconContainer,
+  FavoritesContainer,
 } from './styles';
 
 const Header = () => {
   const router = useRouter();
   const isMobile = useIsMobile();
-  const { setSearchValue, title, contextType } = useLayout();
+  const {
+    setSearchValue,
+    title,
+    contextType,
+    setOpenFavorites,
+    openFavorites,
+  } = useLayout();
 
   const renderSearchContainer = () => (
     <SearchContainer>
@@ -42,8 +51,23 @@ const Header = () => {
     <TitleMainHeader>Bloom Books</TitleMainHeader>
   );
 
+  const handleOpenFavorites = () => {
+    setOpenFavorites(!openFavorites);
+  };
+
+  const handleClose = () => {
+    setOpenFavorites(false);
+  };
+
   const renderFavoriteIcon = () => (
-    <FavoriteIcon color='#fff' size={24} fill='#fff' />
+    <FavoriteIconContainer $isactive={openFavorites}>
+      <FavoriteIcon
+        color='#fff'
+        size={24}
+        fill='#fff'
+        onClick={handleOpenFavorites}
+      />
+    </FavoriteIconContainer>
   );
 
   const renderMainHeaderContent = () => {
@@ -69,22 +93,32 @@ const Header = () => {
   };
 
   return (
-    <Container>
-      <MainHeader>{renderMainHeaderContent()}</MainHeader>
-      <SubHeader>
-        <TitleSubHeader title={title}>
-          {contextType === 'book' && (
-            <BackIcon
-              size={24}
-              color='#010311'
-              onClick={() => router.push('/')}
-            />
-          )}
-          {title}
-        </TitleSubHeader>
-        <ViewMode />
-      </SubHeader>
-    </Container>
+    <>
+      <Container>
+        <MainHeader>{renderMainHeaderContent()}</MainHeader>
+        <SubHeader>
+          <TitleSubHeader title={title}>
+            {contextType === 'book' && (
+              <BackIcon
+                size={24}
+                color='#010311'
+                onClick={() => router.push('/')}
+              />
+            )}
+            {title}
+          </TitleSubHeader>
+          <ViewMode />
+        </SubHeader>
+      </Container>
+      <Drawer
+        isOpen={openFavorites}
+        onClose={handleClose}
+        width={400}
+        offsetTop={60}
+      >
+        <FavoritesContainer>asa</FavoritesContainer>
+      </Drawer>
+    </>
   );
 };
 

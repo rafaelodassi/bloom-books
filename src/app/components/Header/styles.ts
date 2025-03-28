@@ -1,5 +1,5 @@
 import { Search, Star, ArrowLeft } from 'lucide-react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
@@ -91,6 +91,22 @@ export const SearchIcon = styled(Search)`
   left: 6px;
 `;
 
+export const FavoriteIconContainer = styled.div<{ $isactive: boolean }>`
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background-color 0.3s linear;
+
+  ${(props) =>
+    props.$isactive &&
+    css`
+      background-color: #0b1a8e;
+    `}
+`;
+
 export const FavoriteIcon = styled(Star)`
   transition: opacity 0.3s linear;
   flex-shrink: 0;
@@ -129,4 +145,8 @@ export const MainHeaderIsMobile = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+`;
+
+export const FavoritesContainer = styled.div`
+  border-top: 6px solid #0b1a8e;
 `;

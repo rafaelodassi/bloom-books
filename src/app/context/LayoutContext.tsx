@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, ReactNode } from 'react';
 
 interface LayoutContext {
   viewMode: string;
@@ -15,10 +15,12 @@ interface LayoutContext {
   setTitle: (title: string) => void;
   contextType: string;
   setContextType: (contextType: string) => void;
+  openFavorites: boolean;
+  setOpenFavorites: (openFavorites: boolean) => void;
 }
 
 interface LayoutProvider {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 const LayoutContext = createContext<LayoutContext | undefined>(undefined);
@@ -30,6 +32,7 @@ export const LayoutProvider = ({ children }: LayoutProvider) => {
   const [searchValue, setSearchValue] = useState('');
   const [title, setTitle] = useState('');
   const [contextType, setContextType] = useState('');
+  const [openFavorites, setOpenFavorites] = useState(false);
 
   const changePerPage = (perPage: number) => {
     setCurrentPage(1);
@@ -51,6 +54,8 @@ export const LayoutProvider = ({ children }: LayoutProvider) => {
         setTitle,
         contextType,
         setContextType,
+        openFavorites,
+        setOpenFavorites,
       }}
     >
       {children}
