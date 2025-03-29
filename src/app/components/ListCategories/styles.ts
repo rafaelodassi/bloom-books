@@ -109,5 +109,18 @@ export const CategoryContainer = styled.div<{ $viewmode: string }>`
 `;
 
 export const SkeletonContainer = styled(Container)`
-  gap: 18px;
+  gap: 20px;
+`;
+
+export const SkeletonContent = styled.div`
+  width: 186px;
+  max-width: 186px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  @media (max-width: 768px) {
+    width: 45%;
+    max-width: 45%;
+  }
 `;

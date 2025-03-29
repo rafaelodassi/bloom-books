@@ -13,7 +13,6 @@ export const Container = styled.div<{
   width: string | number;
   height: string | number;
 }>`
-  display: inline-block;
   width: ${(props) =>
     typeof props.width === 'string' ? `${props.width}` : `${props.width}px`};
   height: ${(props) =>

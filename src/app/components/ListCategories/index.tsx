@@ -11,6 +11,7 @@ import {
   Updated,
   CategoryContainer,
   SkeletonContainer,
+  SkeletonContent,
 } from './styles';
 
 interface ListCategories {
@@ -22,13 +23,29 @@ const ListCategories = ({ data, loading }: ListCategories) => {
   const { viewMode } = useLayout();
 
   if (loading) {
-    return (
-      <SkeletonContainer $viewmode={viewMode}>
-        {[1, 2, 3, 4, 5].map((i) => (
-          <Skeleton width={'100%'} height={24} key={i} />
-        ))}
-      </SkeletonContainer>
-    );
+    if (viewMode === 'list') {
+      return (
+        <SkeletonContainer $viewmode={viewMode}>
+          {[1, 2, 3, 4, 5].map((i) => (
+            <Skeleton width={'100%'} height={24} key={i} />
+          ))}
+        </SkeletonContainer>
+      );
+    }
+
+    if (viewMode === 'card') {
+      return (
+        <SkeletonContainer $viewmode={viewMode}>
+          {[1, 2, 3, 4, 5].map((i) => (
+            <SkeletonContent key={i}>
+              <Skeleton width={'100%'} height={24} />
+              <Skeleton width={'100%'} height={14} />
+              <Skeleton width={'100%'} height={14} />
+            </SkeletonContent>
+          ))}
+        </SkeletonContainer>
+      );
+    }
   }
 
   return (
