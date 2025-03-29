@@ -11,6 +11,8 @@ import {
   Author,
   BookInfo,
   Title,
+  Overflow,
+  EmptyText,
 } from './styles';
 
 const ListFavorites = () => {
@@ -28,26 +30,32 @@ const ListFavorites = () => {
   return (
     <Container>
       <Title>Favoritos</Title>
-      {!favorites.length && <span>Nenhum livro adicionado aos favoritos</span>}
-      {favorites.map((favorite) => (
-        <FavoriteContent key={favorite.uuid}>
-          <BookImage>
-            <BookIcon size={24} color='#5062F0' />
-          </BookImage>
-          <BookInfo>
-            <BookTitle>{getBookDetails(favorite.book_details).title}</BookTitle>
-            <Author>
-              {getBookDetails(favorite.book_details).contributor}
-              <FavoriteIcon
-                size={16}
-                color='#5062F0'
-                onClick={() => handleRemoveFavorite(favorite.uuid)}
-                $isfavorite={isFavorite(favorite.uuid)}
-              />
-            </Author>
-          </BookInfo>
-        </FavoriteContent>
-      ))}
+      {!favorites.length && (
+        <EmptyText>Nenhum livro adicionado aos favoritos</EmptyText>
+      )}
+      <Overflow>
+        {favorites.map((favorite) => (
+          <FavoriteContent key={favorite.uuid}>
+            <BookImage>
+              <BookIcon size={24} color='#5062F0' />
+            </BookImage>
+            <BookInfo>
+              <BookTitle>
+                {getBookDetails(favorite.book_details).title}
+              </BookTitle>
+              <Author>
+                {getBookDetails(favorite.book_details).contributor}
+                <FavoriteIcon
+                  size={16}
+                  color='#5062F0'
+                  onClick={() => handleRemoveFavorite(favorite.uuid)}
+                  $isfavorite={isFavorite(favorite.uuid)}
+                />
+              </Author>
+            </BookInfo>
+          </FavoriteContent>
+        ))}
+      </Overflow>
     </Container>
   );
 };

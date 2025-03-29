@@ -3,10 +3,10 @@ import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   border-top: 6px solid #0b1a8e;
-  padding: 14px 16px;
   display: flex;
   gap: 12px;
   flex-direction: column;
+  height: 100%;
 `;
 
 export const FavoriteContent = styled.div`
@@ -64,4 +64,23 @@ export const Title = styled.h1`
   font-size: 18px;
   font-weight: 700;
   color: #0b1a8e;
+  padding: 14px 16px;
+  padding-bottom: 0px;
+  box-shadow: rgba(255, 255, 255, 1) 0px 31px 15px -10px;
+  z-index: 1;
+`;
+
+export const Overflow = styled.div`
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  flex-grow: 1;
+  padding: 14px 16px;
+`;
+export const EmptyText = styled.span`
+  padding: 14px 16px;
+  padding-top: 0px;
 `;
