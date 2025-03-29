@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useLayout } from '../../context/LayoutContext';
 import { useIsMobile } from '../../hooks/useMobile';
 import { Drawer } from '../Drawer';
+import { ListFavorites } from '../ListFavorites';
 import { ViewMode } from '../ViewMode';
 
 import {
@@ -21,7 +22,6 @@ import {
   BackIcon,
   MainHeaderIsMobile,
   FavoriteIconContainer,
-  FavoritesContainer,
 } from './styles';
 
 const Header = () => {
@@ -116,7 +116,7 @@ const Header = () => {
         width={400}
         offsetTop={60}
       >
-        <FavoritesContainer>asa</FavoritesContainer>
+        <ListFavorites />
       </Drawer>
     </>
   );

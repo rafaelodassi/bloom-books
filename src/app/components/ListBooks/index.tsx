@@ -1,5 +1,5 @@
 import { useLayout } from '../../context/LayoutContext';
-import { Book, ResponseBooks } from '../../services/types';
+import { Book } from '../../services/types';
 
 import {
   Container,
@@ -24,9 +24,7 @@ interface ListBooks {
 const ListBooks = ({ data }: ListBooks) => {
   const { viewMode, addFavorite, favorites } = useLayout();
 
-  const getBookDetails = (
-    bookDetails: ResponseBooks['results'][0]['book_details']
-  ) => bookDetails[0];
+  const getBookDetails = (bookDetails: Book['book_details']) => bookDetails[0];
 
   const handleClickBuy = (url: string) => {
     window.open(url, '_blank');

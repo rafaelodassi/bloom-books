@@ -146,7 +146,3 @@ export const MainHeaderIsMobile = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
-
-export const FavoritesContainer = styled.div`
-  border-top: 6px solid #0b1a8e;
-`;

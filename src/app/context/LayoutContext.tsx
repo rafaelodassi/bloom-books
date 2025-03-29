@@ -20,8 +20,8 @@ interface LayoutContext {
   openFavorites: boolean;
   setOpenFavorites: (openFavorites: boolean) => void;
   favorites: Book[];
-  setFavorites: (favorites: Book[]) => void;
   addFavorite: (favorite: Book) => void;
+  removeFavorite: (uuid: string) => void;
 }
 
 interface LayoutProvider {
@@ -59,6 +59,11 @@ export const LayoutProvider = ({ children }: LayoutProvider) => {
     }
   };
 
+  const removeFavorite = (uuid: string) => {
+    const filteredFavorite = favorites.filter((f) => f.uuid !== uuid);
+    setFavorites(filteredFavorite);
+  };
+
   return (
     <LayoutContext.Provider
       value={{
@@ -77,8 +82,8 @@ export const LayoutProvider = ({ children }: LayoutProvider) => {
         openFavorites,
         setOpenFavorites,
         favorites,
-        setFavorites,
         addFavorite,
+        removeFavorite,
       }}
     >
       {children}
