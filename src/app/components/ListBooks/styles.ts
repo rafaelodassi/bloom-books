@@ -10,6 +10,7 @@ export const Container = styled.div<{ $viewmode: string }>`
   gap: 28px;
   flex-grow: 1;
   overflow-y: auto;
+  align-content: flex-start;
 
   ${(props) =>
     props.$viewmode === 'card' &&
@@ -45,6 +46,11 @@ export const BookContainer = styled.div<{ $viewmode: string }>`
       gap: 12px;
       width: 186px;
       max-width: 186px;
+
+      @media (max-width: 768px) {
+        width: 45%;
+        max-width: 45%;
+      }
     `}
 `;
 

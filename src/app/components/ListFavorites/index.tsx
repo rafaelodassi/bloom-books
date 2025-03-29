@@ -28,6 +28,7 @@ const ListFavorites = () => {
   return (
     <Container>
       <Title>Favoritos</Title>
+      {!favorites.length && <span>Nenhum livro adicionado aos favoritos</span>}
       {favorites.map((favorite) => (
         <FavoriteContent key={favorite.uuid}>
           <BookImage>

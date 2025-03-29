@@ -98,7 +98,6 @@ export const FavoriteIconContainer = styled.div<{ $isactive: boolean }>`
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: background-color 0.3s linear;
 
   ${(props) =>
     props.$isactive &&

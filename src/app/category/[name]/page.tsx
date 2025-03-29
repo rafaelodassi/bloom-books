@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { useParams } from 'next/navigation';
 
+import { ErrorText } from '../../components/ErrorText';
 import { ListBooks } from '../../components/ListBooks';
 import { Pagination } from '../../components/Pagination';
 import { useLayout } from '../../context/LayoutContext';
@@ -25,7 +26,7 @@ const Page = () => {
     setContextType,
   } = useLayout();
 
-  const { data } = useFetchData<ResponseBooks>({
+  const { data, error } = useFetchData<ResponseBooks>({
     url: `lists.json?list=${name}`,
   });
 
@@ -60,6 +61,10 @@ const Page = () => {
     currentPage,
     items: dataBySearch,
   });
+
+  if (error) {
+    return <ErrorText>Erro ao carregar os livros</ErrorText>;
+  }
 
   return (
     <>

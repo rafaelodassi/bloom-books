@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
+import { ErrorText } from './components/ErrorText';
 import { ListCategories } from './components/ListCategories';
 import { Pagination } from './components/Pagination';
 import { useLayout } from './context/LayoutContext';
@@ -22,7 +23,7 @@ const Home = () => {
     setContextType,
   } = useLayout();
 
-  const { data } = useFetchData<ResponseCategories>({
+  const { data, error } = useFetchData<ResponseCategories>({
     url: 'lists/names.json',
   });
 
@@ -57,6 +58,10 @@ const Home = () => {
     currentPage,
     items: dataBySearch,
   });
+
+  if (error) {
+    return <ErrorText>Erro ao carregar os gêneros</ErrorText>;
+  }
 
   return (
     <>
