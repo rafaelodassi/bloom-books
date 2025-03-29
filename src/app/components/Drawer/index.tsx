@@ -8,8 +8,8 @@ import { Container, DrawerContainer, Overlay } from './styles';
 interface Drawer {
   children: ReactNode;
   isOpen: boolean;
-  width?: number;
-  offsetTop?: number;
+  width?: number | string;
+  offsetTop?: number | string;
   onClose?: () => void;
 }
 

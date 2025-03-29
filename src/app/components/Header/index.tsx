@@ -113,7 +113,7 @@ const Header = () => {
       <Drawer
         isOpen={openFavorites}
         onClose={handleClose}
-        width={400}
+        width={isMobile ? '80%' : 400}
         offsetTop={60}
       >
         <ListFavorites />

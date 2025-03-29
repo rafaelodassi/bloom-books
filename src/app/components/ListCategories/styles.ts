@@ -3,14 +3,12 @@ import styled, { css } from 'styled-components';
 
 export const Container = styled.div<{ $viewmode: string }>`
   width: 100%;
-  padding: 0px 120px;
-  padding-top: 24px;
+  padding: 24px 120px;
   display: flex;
   flex-direction: column;
   gap: 50px;
   flex-grow: 1;
   overflow-y: auto;
-  align-content: flex-start;
 
   ${(props) =>
     props.$viewmode === 'card' &&
@@ -20,6 +18,7 @@ export const Container = styled.div<{ $viewmode: string }>`
       gap: 30px;
       flex-wrap: wrap;
       justify-content: center;
+      align-content: flex-start;
     `}
 
   @media (max-width: 768px) {

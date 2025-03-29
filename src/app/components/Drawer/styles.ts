@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.div<{ $offsettop?: number }>`
+export const Container = styled.div<{ $offsettop?: number | string }>`
   width: 100vw;
   height: ${(props) =>
     props.$offsettop ? `calc(100vh - ${props.$offsettop}px)` : '100vh'};
@@ -9,8 +9,9 @@ export const Container = styled.div<{ $offsettop?: number }>`
   right: 0px;
 `;
 
-export const DrawerContainer = styled.div<{ $width?: number }>`
-  width: ${(props) => (props.$width ? `${props.$width}px` : '400px')};
+export const DrawerContainer = styled.div<{ $width?: number | string }>`
+  width: ${(props) =>
+    typeof props.$width === 'string' ? props.$width : `${props.$width}px`};
   height: 100%;
   background: #fff;
   position: absolute;
