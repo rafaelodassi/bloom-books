@@ -1,3 +1,4 @@
+import { Skeleton } from '../../components/Skeleton';
 import { useLayout } from '../../context/LayoutContext';
 import { Book } from '../../services/types';
 
@@ -15,13 +16,17 @@ import {
   TitleContainer,
   FavoriteIcon,
   BookIcon,
+  SkeletonContainer,
+  SkeletonInfoContainer,
+  SkeletonContent,
 } from './styles';
 
 interface ListBooks {
   data: Book[];
+  loading?: boolean;
 }
 
-const ListBooks = ({ data }: ListBooks) => {
+const ListBooks = ({ data, loading }: ListBooks) => {
   const { viewMode, addFavorite, favorites } = useLayout();
 
   const getBookDetails = (bookDetails: Book['book_details']) => bookDetails[0];
@@ -36,6 +41,24 @@ const ListBooks = ({ data }: ListBooks) => {
 
   const isFavorite = (uuid: string) =>
     !!favorites.find((favorite) => favorite.uuid === uuid);
+
+  if (loading) {
+    return (
+      <SkeletonContainer $viewmode={viewMode}>
+        {[1, 2].map((i) => (
+          <SkeletonContent key={i}>
+            <Skeleton width={130} height={167} />
+            <SkeletonInfoContainer>
+              <Skeleton width={'100%'} height={20} />
+              <Skeleton width={'100%'} height={20} />
+              <Skeleton width={'100%'} height={20} />
+              <Skeleton width={130} height={32} />
+            </SkeletonInfoContainer>
+          </SkeletonContent>
+        ))}
+      </SkeletonContainer>
+    );
+  }
 
   return (
     <Container $viewmode={viewMode}>

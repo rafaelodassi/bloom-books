@@ -155,3 +155,19 @@ export const FavoriteIcon = styled(Star)<{ $isfavorite: boolean }>`
 export const BookIcon = styled(BookText)`
   opacity: 0.5;
 `;
+
+export const SkeletonContainer = styled(Container)`
+  gap: 22px;
+`;
+
+export const SkeletonContent = styled.div`
+  gap: 22px;
+  display: flex;
+`;
+
+export const SkeletonInfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+`;

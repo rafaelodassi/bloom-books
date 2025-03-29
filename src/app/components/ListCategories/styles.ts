@@ -107,3 +107,7 @@ export const CategoryContainer = styled.div<{ $viewmode: string }>`
     gap: 12px;
   }
 `;
+
+export const SkeletonContainer = styled(Container)`
+  gap: 18px;
+`;

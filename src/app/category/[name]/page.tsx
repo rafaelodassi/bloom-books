@@ -26,7 +26,7 @@ const Page = () => {
     setContextType,
   } = useLayout();
 
-  const { data, error } = useFetchData<ResponseBooks>({
+  const { data, error, loading } = useFetchData<ResponseBooks>({
     url: `lists.json?list=${name}`,
   });
 
@@ -68,7 +68,7 @@ const Page = () => {
 
   return (
     <>
-      <ListBooks data={paginatedItems} />
+      <ListBooks data={paginatedItems} loading={loading} />
       <Pagination
         totalItems={dataBySearch.length}
         perPage={perPage}

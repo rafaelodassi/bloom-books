@@ -1,3 +1,4 @@
+import { Skeleton } from '../../components/Skeleton';
 import { useLayout } from '../../context/LayoutContext';
 import { Category } from '../../services/types';
 
@@ -9,14 +10,26 @@ import {
   TitleContainer,
   Updated,
   CategoryContainer,
+  SkeletonContainer,
 } from './styles';
 
 interface ListCategories {
   data: Category[];
+  loading?: boolean;
 }
 
-const ListCategories = ({ data }: ListCategories) => {
+const ListCategories = ({ data, loading }: ListCategories) => {
   const { viewMode } = useLayout();
+
+  if (loading) {
+    return (
+      <SkeletonContainer $viewmode={viewMode}>
+        {[1, 2, 3, 4, 5].map((i) => (
+          <Skeleton width={'100%'} height={24} key={i} />
+        ))}
+      </SkeletonContainer>
+    );
+  }
 
   return (
     <Container $viewmode={viewMode}>

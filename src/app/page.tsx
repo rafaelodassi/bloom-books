@@ -23,7 +23,7 @@ const Home = () => {
     setContextType,
   } = useLayout();
 
-  const { data, error } = useFetchData<ResponseCategories>({
+  const { data, error, loading } = useFetchData<ResponseCategories>({
     url: 'lists/names.json',
   });
 
@@ -65,7 +65,7 @@ const Home = () => {
 
   return (
     <>
-      <ListCategories data={paginatedItems} />
+      <ListCategories data={paginatedItems} loading={loading} />
       <Pagination
         totalItems={dataBySearch.length}
         perPage={perPage}
