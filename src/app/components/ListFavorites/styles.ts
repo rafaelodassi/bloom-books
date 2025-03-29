@@ -83,4 +83,5 @@ export const Overflow = styled.div`
 export const EmptyText = styled.span`
   padding: 14px 16px;
   padding-top: 0px;
+  z-index: 2;
 `;

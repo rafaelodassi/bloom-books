@@ -48,6 +48,10 @@ const ListCategories = ({ data, loading }: ListCategories) => {
     }
   }
 
+  if (!data.length) {
+    return <Container $viewmode={'list'}>Nenhum item foi encontrado</Container>;
+  }
+
   return (
     <Container $viewmode={viewMode}>
       {data.map((category) => (
