@@ -4,7 +4,7 @@ Gerencie, busque e adicione aos favoritos os seus livros preferidos.
 
 ## 📦 Acesse o projeto
 
-Acesse o projeto hospedado na Vercel: https://bloom-books-phi.vercel.app/
+Acesse o projeto hospedado na Vercel: https://bloom-books-three.vercel.app/
 
 ## 🚀 Começando
 
