@@ -1,6 +1,6 @@
 # Bloom Books
 
-Gerencie, busque e adicione aos favoritos os seus livros favoritos.
+Gerencie, busque e adicione aos favoritos os seus livros preferidos.
 
 ## 📦 Acesse o projeto
 
