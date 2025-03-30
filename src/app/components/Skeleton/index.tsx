@@ -6,7 +6,7 @@ interface Skeleton {
 }
 
 const Skeleton = ({ width, height }: Skeleton) => (
-  <Container width={width} height={height} />
+  <Container width={width} height={height} data-testid='skeleton' />
 );
 
 export { Skeleton };

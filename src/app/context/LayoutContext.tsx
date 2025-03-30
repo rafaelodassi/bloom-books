@@ -28,7 +28,9 @@ interface LayoutProvider {
   children: ReactNode;
 }
 
-const LayoutContext = createContext<LayoutContext | undefined>(undefined);
+export const LayoutContext = createContext<LayoutContext | undefined>(
+  undefined
+);
 
 export const LayoutProvider = ({ children }: LayoutProvider) => {
   const [viewMode, setViewMode] = useState('list');
@@ -95,7 +97,7 @@ export const useLayout = () => {
   const context = useContext(LayoutContext);
 
   if (!context) {
-    throw new Error('useCounter must be used within a CounterProvider');
+    throw new Error('useLayout must be used within a LayoutProvider');
   }
 
   return context;
