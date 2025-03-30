@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import { Skeleton } from '../../components/Skeleton';
 import { useLayout } from '../../context/LayoutContext';
 import { Book } from '../../services/types';
@@ -28,8 +30,6 @@ interface ListBooks {
 
 const ListBooks = ({ data, loading }: ListBooks) => {
   const { viewMode, addFavorite, favorites } = useLayout();
-
-  const getBookDetails = (bookDetails: Book['book_details']) => bookDetails[0];
 
   const handleClickBuy = (url: string) => {
     window.open(url, '_blank');
@@ -68,14 +68,23 @@ const ListBooks = ({ data, loading }: ListBooks) => {
     <Container $viewmode={viewMode}>
       {data.map((book) => (
         <BookContainer key={book.uuid} $viewmode={viewMode}>
-          <BookImage>
-            <BookIcon size={48} color='#5062F0' />
-          </BookImage>
+          {book.book_image ? (
+            <Image
+              src={book.book_image}
+              width={100}
+              height={160}
+              alt={book.title}
+            />
+          ) : (
+            <BookImage>
+              <BookIcon size={48} color='#5062F0' />
+            </BookImage>
+          )}
           <BookInfo>
             <TitleContainer $viewmode={viewMode}>
-              <Title>{getBookDetails(book.book_details).title}</Title>
+              <Title>{book.title}</Title>
               <Author>
-                {getBookDetails(book.book_details).contributor}
+                {book.contributor}
                 <FavoriteIcon
                   size={16}
                   color='#5062F0'
@@ -84,13 +93,11 @@ const ListBooks = ({ data, loading }: ListBooks) => {
                 />
               </Author>
             </TitleContainer>
-            <Description>
-              {getBookDetails(book.book_details).description}
-            </Description>
-            <Publisher>{getBookDetails(book.book_details).publisher}</Publisher>
+            <Description>{book.description}</Description>
+            <Publisher>{book.publisher}</Publisher>
             <Rank>Rank {book.rank}</Rank>
             <ButtonBuy onClick={() => handleClickBuy(book.amazon_product_url)}>
-              Compre por R${getBookDetails(book.book_details).price}
+              Compre por R$ {book.price?.replace(/\./g, ',')}
             </ButtonBuy>
           </BookInfo>
         </BookContainer>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import { ErrorText } from './components/ErrorText';
 import { ListCategories } from './components/ListCategories';
@@ -8,52 +8,32 @@ import { Pagination } from './components/Pagination';
 import { useLayout } from './context/LayoutContext';
 import { useFetchData } from './hooks/useFetchData';
 import { usePagination } from './hooks/usePagination';
-import { ResponseCategories } from './services/types';
-
-type Categories = ResponseCategories['results'];
+import { useSearch } from './hooks/useSearch';
+import { Category, ResponseCategories } from './services/types';
 
 const Home = () => {
-  const [dataBySearch, setDataBySearch] = useState<Categories>([]);
-  const {
-    perPage,
-    currentPage,
-    setCurrentPage,
-    searchValue,
-    setTitle,
-    setContextType,
-  } = useLayout();
+  const { perPage, currentPage, setTitle, setContextType, setSearchValue } =
+    useLayout();
 
   const { data, error, loading } = useFetchData<ResponseCategories>({
     url: 'lists/names.json',
   });
 
-  const results = data.results || [];
+  const results = useMemo(() => data.results || [], [data]);
+
+  const { dataBySearch } = useSearch<Category[]>({
+    data: results,
+    keyToSearch: 'display_name',
+  });
 
   useEffect(() => {
     setContextType('category');
     setTitle('Gêneros');
-    setDataBySearch(results);
+    setSearchValue('');
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
+  }, []);
 
-  useEffect(() => {
-    let filteredData = results;
-
-    if (searchValue) {
-      filteredData = filteredData.filter(
-        (categoryFound) =>
-          categoryFound.display_name
-            .toLowerCase()
-            .search(searchValue.toLowerCase()) !== -1
-      );
-    }
-
-    setCurrentPage(1);
-    setDataBySearch(filteredData);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchValue]);
-
-  const { paginatedItems } = usePagination<Categories>({
+  const { paginatedItems } = usePagination<Category[]>({
     perPage,
     currentPage,
     items: dataBySearch,

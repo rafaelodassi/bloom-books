@@ -33,6 +33,7 @@ const Header = () => {
     contextType,
     setOpenFavorites,
     openFavorites,
+    searchValue,
   } = useLayout();
 
   const renderSearchContainer = () => (
@@ -42,6 +43,7 @@ const Header = () => {
         <SearchInput
           placeholder='Pesquise aqui...'
           onChange={(e) => setSearchValue(e.target.value)}
+          value={searchValue}
         />
       </SearchInputContainer>
     </SearchContainer>

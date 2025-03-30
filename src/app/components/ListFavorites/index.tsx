@@ -1,5 +1,6 @@
+import Image from 'next/image';
+
 import { useLayout } from '../../context/LayoutContext';
-import { Book } from '../../services/types';
 
 import {
   Container,
@@ -18,8 +19,6 @@ import {
 const ListFavorites = () => {
   const { favorites, removeFavorite } = useLayout();
 
-  const getBookDetails = (bookDetails: Book['book_details']) => bookDetails[0];
-
   const isFavorite = (uuid: string) =>
     !!favorites.find((favorite) => favorite.uuid === uuid);
 
@@ -36,15 +35,22 @@ const ListFavorites = () => {
       <Overflow>
         {favorites.map((favorite) => (
           <FavoriteContent key={favorite.uuid}>
-            <BookImage>
-              <BookIcon size={24} color='#5062F0' />
-            </BookImage>
+            {favorite.book_image ? (
+              <Image
+                src={favorite.book_image}
+                width={65}
+                height={100}
+                alt={favorite.title}
+              />
+            ) : (
+              <BookImage>
+                <BookIcon size={24} color='#5062F0' />
+              </BookImage>
+            )}
             <BookInfo>
-              <BookTitle>
-                {getBookDetails(favorite.book_details).title}
-              </BookTitle>
+              <BookTitle>{favorite.title}</BookTitle>
               <Author>
-                {getBookDetails(favorite.book_details).contributor}
+                {favorite.contributor}
                 <FavoriteIcon
                   size={16}
                   color='#5062F0'

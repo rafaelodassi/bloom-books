@@ -17,13 +17,29 @@ function useFetchData<T>({ url }: UseFetchData) {
     const fetchData = async () => {
       try {
         const { data: response } = await api.get<T>(url);
-        const responseData = response as T & { results: T[] };
+        const responseData = response as T & {
+          results: T[] & Record<string, unknown>;
+        };
         const results = responseData.results;
+        const books = results.books as Record<string, unknown>[] | undefined;
 
-        setData({
-          ...responseData,
-          results: results.map((result) => ({ ...result, uuid: uuidv4() })),
-        });
+        if (books) {
+          setData({
+            ...responseData,
+            results: {
+              ...results,
+              books: books.map((book) => ({
+                ...book,
+                uuid: uuidv4(),
+              })),
+            },
+          });
+        } else {
+          setData({
+            ...responseData,
+            results: results.map((result) => ({ ...result, uuid: uuidv4() })),
+          });
+        }
       } catch (error) {
         setError(!!error);
       }
