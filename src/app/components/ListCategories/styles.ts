@@ -102,7 +102,6 @@ export const CategoryContainer = styled.div<{ $viewmode: string }>`
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    flex-grow: 1;
     gap: 12px;
   }
 `;
